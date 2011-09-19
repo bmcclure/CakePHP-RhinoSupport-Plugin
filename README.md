@@ -88,6 +88,7 @@ Adding Rhino Support to your views
 
 There are several ways to integrate Rhino Support (or to use the helper to create your own integration), such as:
 
+Mail Link:
 
     $this->RhinoSupport->mailLink($text = null, $options = array())
 
@@ -97,6 +98,7 @@ This function will create a basic mail link for your visitors to send mail to yo
 *  The email address defaults to [username]@rhinosupport.com. To set your own address set $options['address'].
 *  You can set any other link options you want in the $options array and they will be used for the link element.
 
+Link:
 
     $this->RhinoSupport->link($text = 'Contact Us', $options = array())
 
@@ -106,6 +108,7 @@ site.
 *  $text can be set to the link text to use, or left as the default to use 'Contact Us'.
 *  $options will be passed directly to the link element.
 
+Scroller:
 
     $this->RhinoSupport->scroller($type = 'feedback', $color = 'blue')
 
@@ -115,6 +118,7 @@ to your Rhino Support site.
 * $type can be 'contact' or 'feedback' which will change the text of the scroller.
 * $color can be 'blue', 'red', 'green', 'yellow', 'orange', or 'black' which will change the color of the scroller.
 
+Iframe:
 
     $this->RhinoSupport->iframe($options = array())
 
@@ -128,6 +132,7 @@ $options provided will override any defaults of the same name. The default optio
 *  scrolling: 'no'
 *  src: [your ticket system URL]
 
+Ticket URL:
 
     $this->RhinoSupport->ticketUrl($params = array())
 
