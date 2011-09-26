@@ -18,8 +18,19 @@ class RhinoSupportHelper extends AppHelper {
 		'black' => 7,
 	);
 
-	public function mailLink($text = 'Support', $options = array()) {
-		return $this->Html->link($text, 'mailto:'.$username.'@rhinosupport.com', $options);
+	public function mailLink($text = null, $options = array()) {
+		if (isset($options['address'])) {
+			$address = $options['address'];
+			unset($options['address']);
+		} else {
+			$address = $this->username.'@rhinosupport.com';
+		}
+		
+		if ($text = null) {
+			$text = $address;
+		}
+		
+		return $this->Html->link($text, 'mailto:'.$address, $options);
 	}
 
 	public function link($text = 'Contact Us', $options = array()) {
@@ -30,7 +41,7 @@ class RhinoSupportHelper extends AppHelper {
 			'target' => '_blank',
 		);
 
-		return $this->Html->link($text, $this->_ticketUrl(), array_merge($linkOptions, $options));
+		return $this->Html->link($text, $this->ticketUrl(), array_merge($linkOptions, $options));
 	}
 
 	public function scroller($type = 'feedback', $color = 'blue') {
@@ -40,7 +51,7 @@ class RhinoSupportHelper extends AppHelper {
 
 		$image = $this->Html->image($imageUrl, array('border' => 0, 'alt' => ''));
 
-		$link = $this->Html->link($image, $this->_ticketUrl(), array('target' => '_blank', 'onclick' => $onClick));
+		$link = $this->Html->link($image, $this->ticketUrl(), array('target' => '_blank', 'onclick' => $onClick));
 
 		$output = $this->Html->div(null, $link, array('style' => array(
 			'display' => 'scroll',
@@ -58,13 +69,13 @@ class RhinoSupportHelper extends AppHelper {
 			'height' => 600,
 			'frameborder' => 0,
 			'scrolling' => 'no',
-			'src' => $this->_ticketUrl(array('frames' => 'true')),
+			'src' => $this->ticketUrl(array('frames' => 'true')),
 		);
 
 		return $this->Html->tag('iframe', null, array_merge($iframeOptions, $options));
 	}
 
-	protected function _ticketUrl($params = array()) {
+	public function ticketUrl($params = array()) {
 		return 'https://'.$this->username.'.rhinosupport.com/create-ticket.php'.$this->_buildQueryParams($params);
 	}
 
